@@ -1,5 +1,8 @@
+.DS_Store
+.history
 node_modules
-history
+/dist
+
 
 # Log files
 npm-debug.log*
