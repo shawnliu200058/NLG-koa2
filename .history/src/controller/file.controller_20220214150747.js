@@ -1,0 +1,18 @@
+const { APP_HOST, APP_PORT } = require('../app/config')
+const fileService = require('../service/file.service')
+const 
+
+class FileController {
+  async saveCategoryIcon(ctx) {
+    const { filename, mimetype } = ctx.request.file
+    // 获取分类 id
+    const { id } = ctx.request.body
+
+    // 2.将图像信息数据保存到 category_icon 表中
+    await fileService.createCategoryIcon(filename, mimetype, id)
+
+    const iconUrl = `${APP_HOST}:${APP_PORT}/category/${id}/icon`
+
+    ctx.body = '上传分类图标成功'
+  }
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "name": "江西赣南脐橙子",
+    "category_id": 1,
+    "detail": "2021年新秋橙【全黄纯甜水分足】",
+    "price": 13.8,
+    "unit": "箱",
+    "specification": "3斤",
+    "sale": 231,
+    "stock": 672,
+    "address": "江西赣州",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/3534803790/O1CN01occboS1drrouwtFb1_!!3534803790.jpg_430x430q90.jpg",
+    "url": "https://detail.tmall.com/item.htm?id=562902855509&ali_refid=a3_430582_1006:1151719482:N:3PFFJdNtaI9Pm0JHpIBk0w==:6c8439ab3c672ac615ca6fc766befac4&ali_trackid=1_6c8439ab3c672ac615ca6fc766befac4&spm=a230r.1.14.1&sku_properties=147956252:7454582"
+  },
+  {
+    "name": "三月李当季青李子",
+    "category_id": 1,
+    "detail": null,
+    "price": 26.9,
+    "unit": "箱",
+    "specification": "1斤",
+    "stock": 123,
+    "sale": 99,
+    "address": "云南昆明",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/i3/2211998935902/O1CN012Gagpv1tTAJth2Uht_!!0-item_pic.jpg_430x430q90.jpg",
+    "url": "https://detail.tmall.com/item.htm?id=668318776929&ali_refid=a3_430582_1006:1505670115:N:sxaZqmmpYIMUcTQNR3ibpYEYgdV07lHy:047b33f10748a3458164f6aa9bc93ad5&ali_trackid=1_047b33f10748a3458164f6aa9bc93ad5&spm=a230r.1.14.11"
+  },
+  {
+    "name": "大连美早樱桃",
+    "category_id": 1,
+    "detail": "国产樱桃 次日达丨礼盒包装丨送亲朋好友",
+    "price": 258,
+    "unit": "盒",
+    "specification": "1000g",
+    "stock": 111,
+    "sale": 68,
+    "address": "辽宁大连",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/i4/2627785630/O1CN011wFVtr1rSaaZDwKQJ_!!2627785630.jpg_430x430q90.jpg",
+    "url": "https://detail.tmall.com/item.htm?spm=a230r.1.14.16.41f66e1cjmW1gC&id=660672390304&ns=1&abbucket=5&skuId=4813108588351"
+  },
+  {
+    "name": "烟台大樱桃",
+    "category_id": 1,
+    "detail": null,
+    "price": 78,
+    "unit": "箱",
+    "specification": "2500g",
+    "stock": 451,
+    "sale": 368,
+    "address": "山东烟台",
+    "displayPicUrl": "https://gd3.alicdn.com/imgextra/i2/2212734738628/O1CN017mosf72DbfzHkKSYy_!!2212734738628.jpg_400x400.jpg",
+    "url": "https://item.taobao.com/item.htm?spm=a230r.1.14.22.41f66e1cjmW1gC&id=664030957432&ns=1&abbucket=5#detail"
+  },
+  {
+    "name": "2022海南贵妃芒大果",
+    "category_id": 1,
+    "detail": null,
+    "price": 26.8,
+    "unit"
+  }
+]

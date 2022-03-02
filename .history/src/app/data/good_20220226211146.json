@@ -1,0 +1,25 @@
+[
+  {
+    "name": "江西赣南脐橙子",
+    "category_id": 1,
+    "detail": "华为nova 3（全网通） ",
+    "price": 13.8,
+    "unit": "箱",
+    "specification": "3斤/箱",
+    "stock": 672,
+    "address": "江西赣州",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/3534803790/O1CN01occboS1drrouwtFb1_!!3534803790.jpg_430x430q90.jpg",
+    "url": "https://detail.tmall.com/item.htm?id=562902855509&ali_refid=a3_430582_1006:1151719482:N:3PFFJdNtaI9Pm0JHpIBk0w==:6c8439ab3c672ac615ca6fc766befac4&ali_trackid=1_6c8439ab3c672ac615ca6fc766befac4&spm=a230r.1.14.1&sku_properties=147956252:7454582"
+  },
+  {
+    "name": "苹为",
+    "category_id": 1,
+    "detail": "苹为nova 3（全网通） ",
+    "price": 17,
+    "unit": "65",
+    "specification": "http://detail.zol.com.cn/l",
+    "stock": 12,
+    "address": "wqeqwe",
+    "displayPicUrl": "qasdwe"
+  }
+]

@@ -1,0 +1,1 @@
+const {APP_HOST, APP_} = require('../app/config')

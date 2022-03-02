@@ -1,0 +1,10 @@
+const Router = require('@koa/router')
+
+const {getDetailPic} = require('../controller/good.controller')
+
+const goodRouter = new Router({prefix: '/good'})
+
+// 获取商品的详情图列表
+goodRouter.get('/:goodId/detail_pic', getDetailPic)
+
+module.exports = goodRouter

@@ -1,0 +1,5 @@
+class AuthMiddleware {
+  verifyLogin(schema) {
+    
+  }
+}
