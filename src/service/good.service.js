@@ -32,7 +32,7 @@ class GoodService {
 
   async getGoodList() {
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, 
-        good.specification, good.stock, good.address, good.displayPicUrl,
+        good.specification, good.sale, good.stock, good.address, good.displayPicUrl,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id

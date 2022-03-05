@@ -1,0 +1,72 @@
+[
+  {
+    "name": "四川特产农家自制烟熏肉",
+    "category_id": 2,
+    "detail": null,
+    "price": 43.8,
+    "unit": "袋",
+    "specification": "400g",
+    "sale": 45,
+    "stock": 99,
+    "address": "四川绵阳",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/i3/2208629255757/O1CN01t69l2N1sOkqP9ap2n_!!2208629255757.jpg",
+    "url": "https://detail.tmall.com/item.htm?spm=a230r.1.14.7.15ae56c4nLwpRd&id=624449501883&ns=1&abbucket=5&skuId=4655687489321",
+    "user_id": 1
+  },
+  {
+    "name": "广西特产甘家界柠檬鸭肉",
+    "category_id": 2,
+    "detail": "非遗好味，加热即食，5分钟一道开胃菜！",
+    "price": 88,
+    "unit": "袋",
+    "specification": "950g",
+    "stock": 656,
+    "sale": 298,
+    "address": "广西南宁",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/4227877824/O1CN01xxIMGJ27fRYsJbSfA_!!4227877824.jpg_430x430q90.jpg",
+    "url": "https://detail.tmall.com/item.htm?id=580930929096&ali_refid=a3_420434_1006:1183890002:N:U/uyrw92G29rlSRoNJdXSfn2fkTs9JnR:705f80fb905a0a9de213032801bab7b5&ali_trackid=1_705f80fb905a0a9de213032801bab7b5&spm=a230r.1.1957635.7&skuId=4882949907377",
+    "user_id": 2
+  },
+  {
+    "name": "湖南衡阳永州特产农家自制夫子菜",
+    "category_id": 2,
+    "detail": null,
+    "price": 28.8,
+    "unit": "袋",
+    "specification": "半斤",
+    "stock": 121,
+    "sale": 69,
+    "address": "湖南衡阳",
+    "displayPicUrl": "https://gd4.alicdn.com/imgextra/i1/2207839312347/O1CN018Fxvjd1TCyAdWwB8E_!!2207839312347.jpg_400x400.jpg",
+    "url": "https://item.taobao.com/item.htm?id=619683608489&ali_refid=a3_420434_1006:1288910008:N:%2ByAi2lK%2FLNu2UMEtJ9xEEw%3D%3D:bd521a3fd2d9ba714bc42881c9bbaf31&ali_trackid=1_bd521a3fd2d9ba714bc42881c9bbaf31&spm=a230r.1.1957635.12",
+    "user_id": 3
+  },
+  {
+    "name": "正宗生驴肉真空驴肉火烧",
+    "category_id": 2,
+    "detail": "新鲜现杀驴肉，速冻瓷实后+冰块+泡沫箱发货",
+    "price": 108,
+    "unit": "袋",
+    "specification": "3斤",
+    "stock": 99,
+    "sale": 12,
+    "address": "河北石家庄",
+    "displayPicUrl": "https://img.alicdn.com/imgextra/i3/2201470753369/O1CN01QKSU4L1al2v3AcArk_!!2201470753369.jpg_430x430q90.jpg",
+    "url": "https://detail.tmall.com/item.htm?id=603120092779&ali_refid=a3_420434_1006:1250120165:N:BuFGtU51B71/ACShLCWVEw==:3bf832380619f5e34707b86f497a57a6&ali_trackid=1_3bf832380619f5e34707b86f497a57a6&spm=a230r.1.1957635.22&skuId=4399082679022",
+    "user_id": 4
+  },
+  {
+    "name": "湖南郴州桂阳特产鸭肉",
+    "category_id": 2,
+    "detail": null,
+    "price": 36.6,
+    "unit": "瓶",
+    "specification": "248",
+    "stock": 476,
+    "sale": 100,
+    "address": "湖南永州",
+    "displayPicUrl": "https://gd4.alicdn.com/imgextra/i4/1667113637/O1CN01JQBRJG1cjn2AWQNx0_!!1667113637.jpg_400x400.jpg",
+    "url": "https://item.taobao.com/item.htm?id=597940620074&ali_refid=a3_420434_1006:1124935586:N:hc8nCHjDB7%2Be1bGiXuAVLOyYL5LR569%2F:c8f018abbca8c595e361d0cfb9d4de29&ali_trackid=1_c8f018abbca8c595e361d0cfb9d4de29&spm=a230r.1.1957635.41",
+    "user_id": 5
+  }
+]

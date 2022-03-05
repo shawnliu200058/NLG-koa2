@@ -16,12 +16,12 @@ pool.getConnection(function (err, conn) {
   else console.log('SQL connection succeeded! ')
 })
 
-// const goodJson = require('./data/good.json')
-// const statement = `INSERT INTO good SET ?`
+// const goodJson = require('./data/detailPic/detailPic2.json')
+// const statement = `INSERT INTO detail_pic SET ?`
 
 // goodJson.forEach(good => {
 //   console.log(good);
-//   pool.query(statement, good)
+//   // pool.query(statement, good)
 // })
 
 module.exports = pool.promise()
