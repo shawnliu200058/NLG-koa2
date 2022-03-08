@@ -3,7 +3,6 @@ const addressService = require('../service/address.service')
 
 class UserController {
   async create(ctx, next) {
-    console.log(ctx.request.body)
     const { userInfo, openid } = ctx.request.body
 
     // 验证用户是否初次登录
@@ -20,12 +19,28 @@ class UserController {
 
   // 创建用户收货地址
   async addDeliverAddress(ctx) {
-    const result = await addressService.create(ctx.request.body)
+    const addressInfo = ctx.request.body
+    const { userId } = ctx.request.query
+    const result = await addressService.create(addressInfo, userId)
     ctx.body = result
   }
 
   async getDeliveryAddress(ctx) {
     const result = await addressService.get()
+    ctx.body = result
+  }
+
+  async modifyDeliveryAddress(ctx) {
+    // console.log(ctx.request.body)
+    const addressInfo = ctx.request.body
+    const { id } = ctx.request.params
+    const result = await addressService.modify(addressInfo, id)
+    ctx.body = result
+  }
+
+  async delDeliveryAddress(ctx) {
+    const { id } = ctx.request.params
+    const result = await addressService.delete(id)
     ctx.body = result
   }
 }
