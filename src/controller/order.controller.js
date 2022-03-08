@@ -1,6 +1,9 @@
+const service = require('../service/order.service')
+
 class OrderController {
   async create(ctx) {
-    ctx.body = 12
+    const result = await service.create(ctx.request.body)
+    ctx.body = result
   }
 }
 
