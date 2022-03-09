@@ -6,7 +6,6 @@ class OrderService {
     const { address, house, phone, realName, user_id } = deliveryAddress
 
     const goodListToStr = JSON.stringify(goodList)
-    // console.log(goodListToStr)
 
     const statement = `INSERT INTO my_order 
       (good_info, total_price, real_name, delivery_address, phone, house, remark, user_id) 
@@ -23,6 +22,18 @@ class OrderService {
       user_id
     ])
 
+    return result
+  }
+
+  async get(userId) {
+    const statement = `SELECT * FROM my_order WHERE user_id = ?`
+    const [result] = await promisePool.execute(statement, [userId])
+    return result
+  }
+
+  async delete(orderId) {
+    const statement = `DELETE FROM my_order WHERE id = ?`
+    const [result] = await promisePool.execute(statement, [orderId])
     return result
   }
 }
