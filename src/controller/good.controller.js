@@ -48,6 +48,12 @@ class GoodController {
     // 展示该商品所有详情图
     ctx.body = picInfo
   }
+
+  async getGoodByKeyword(ctx) {
+    const { keyword } = ctx.request.query
+    const result = await goodService.getGoodsByKeyword(keyword)
+    ctx.body = result
+  }
 }
 
 module.exports = new GoodController()

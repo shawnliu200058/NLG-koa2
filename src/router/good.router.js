@@ -4,7 +4,8 @@ const {
   create,
   getGoodList,
   getDisplayPicByGoodId,
-  getDetailPicByGoodId
+  getDetailPicByGoodId,
+  getGoodByKeyword
 } = require('../controller/good.controller')
 
 const goodRouter = new Router({ prefix: '/good' })
@@ -17,5 +18,7 @@ goodRouter.get('/list', getGoodList)
 goodRouter.get('/:goodId/display_pic', getDisplayPicByGoodId)
 // 获取该商品下详情图
 goodRouter.get('/:goodId/detail_pic', getDetailPicByGoodId)
+// 模糊查询
+goodRouter.get('/query', getGoodByKeyword)
 
 module.exports = goodRouter

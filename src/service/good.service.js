@@ -31,8 +31,8 @@ class GoodService {
   }
 
   async getGoodList() {
-    const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, 
-        good.specification, good.sale, good.stock, good.good_address, good.displayPicUrl,
+    const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.collect_userId,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id
@@ -48,6 +48,12 @@ class GoodService {
       displayPicUrl,
       goodId
     ])
+    return result
+  }
+
+  async getGoodsByKeyword(keyword) {
+    const statement = `SELECT * FROM good WHERE name LIKE ?`
+    const [result] = await promisePool.execute(statement, [`%${keyword}%`])
     return result
   }
 }
