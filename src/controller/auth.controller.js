@@ -10,7 +10,7 @@ class AuthController {
       algorithm: 'RS256'
     })
 
-    ctx.body = { data: { id, name, token } }
+    ctx.body = { returnCode: 200, data: { id, name, token } }
   }
 }
 

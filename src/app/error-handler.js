@@ -28,9 +28,8 @@ const errorHandler = (error, ctx) => {
       status = 404
       message = 'NOT FOUND'
   }
-
-  ctx.status = status
-  ctx.body = message
+  // ctx.status = status
+  ctx.body = { returnCode: status, message }
 }
 
 module.exports = errorHandler

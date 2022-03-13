@@ -7,13 +7,14 @@ const {
   getDetailPicByGoodId,
   getGoodByKeyword
 } = require('../controller/good.controller')
+const { verifyAuth } = require('../middleware/auth.middleware')
 
 const goodRouter = new Router({ prefix: '/good' })
 
 // 创建商品
 goodRouter.post('/create', create)
 // 获取所有商品信息
-goodRouter.get('/list', getGoodList)
+goodRouter.get('/list', verifyAuth, getGoodList)
 // 获取该商品下展示图
 goodRouter.get('/:goodId/display_pic', getDisplayPicByGoodId)
 // 获取该商品下详情图
