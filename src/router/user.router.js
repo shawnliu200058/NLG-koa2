@@ -1,11 +1,14 @@
 const Router = require('@koa/router')
 
+const { verifyAuth } = require('../middleware/auth.middleware')
+
 const {
   create,
   addDeliverAddress,
   getDeliveryAddress,
   modifyDeliveryAddress,
-  delDeliveryAddress
+  delDeliveryAddress,
+  getUserList
 } = require('../controller/user.controller')
 
 const userRouter = new Router({ prefix: '/user' })
@@ -20,5 +23,7 @@ userRouter.get('/address', getDeliveryAddress)
 userRouter.put('/address/modify/:id', modifyDeliveryAddress)
 // 删除用户收货地址
 userRouter.delete('/address/delete/:id', delDeliveryAddress)
+// 获取所有用户信息
+userRouter.post('/list', verifyAuth, getUserList)
 
 module.exports = userRouter

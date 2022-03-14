@@ -4,6 +4,7 @@ const adminService = require('../service/admin.service')
 const errorTypes = require('../constants/error-types')
 const md5password = require('../utils/password-handler')
 const { PUBLIC_KEY } = require('../app/config')
+const { object } = require('joi')
 
 class AuthMiddleware {
   verifyLogin(schema) {
@@ -34,13 +35,15 @@ class AuthMiddleware {
   }
 
   async verifyAuth(ctx, next) {
-    console.log('验证授权的中间件')
     const { authorization } = ctx.headers
+
     if (!authorization) {
       const error = new Error(errorTypes.UNAUTHORIZED)
       return ctx.app.emit('error', error, ctx)
     }
     const token = authorization.replace('Bearer ', '')
+
+    // console.log(token)
 
     try {
       const result = jwt.verify(token, PUBLIC_KEY, {
@@ -49,9 +52,20 @@ class AuthMiddleware {
       ctx.admin = result
       await next()
     } catch (err) {
+      console.log(err)
       const error = new Error(errorTypes.UNAUTHORIZED)
       ctx.app.emit('error', error, ctx)
     }
+    // const result = jwt.verify(token, PUBLIC_KEY, {
+    //   algorithms: ['RS256']
+    // })
+    // if (typeof result === 'object') {
+    //   ctx.admin = result
+    //   await next()
+    // } else {
+    //   const error = new Error(errorTypes.UNAUTHORIZED)
+    //   ctx.app.emit('error', error, ctx)
+    // }
   }
 }
 

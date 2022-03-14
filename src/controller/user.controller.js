@@ -43,6 +43,11 @@ class UserController {
     const result = await addressService.delete(id)
     ctx.body = result
   }
+
+  async getUserList(ctx) {
+    const result = await userService.getList(ctx.request.body)
+    ctx.body = { returnCode: 200, data: result }
+  }
 }
 
 module.exports = new UserController()
