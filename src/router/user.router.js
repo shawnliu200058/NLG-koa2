@@ -8,7 +8,9 @@ const {
   getDeliveryAddress,
   modifyDeliveryAddress,
   delDeliveryAddress,
-  getUserList
+  getUserList,
+  getUserByKeyword,
+  updateUserInfo
 } = require('../controller/user.controller')
 
 const userRouter = new Router({ prefix: '/user' })
@@ -25,5 +27,9 @@ userRouter.put('/address/modify/:id', modifyDeliveryAddress)
 userRouter.delete('/address/delete/:id', delDeliveryAddress)
 // 获取所有用户信息
 userRouter.post('/list', verifyAuth, getUserList)
+// 模糊查询用户信息
+userRouter.post('/query', verifyAuth, getUserByKeyword)
+// 更新用户信息
+userRouter.patch('/:id', updateUserInfo)
 
 module.exports = userRouter

@@ -46,7 +46,19 @@ class UserController {
 
   async getUserList(ctx) {
     const result = await userService.getList(ctx.request.body)
-    ctx.body = { returnCode: 200, data: result }
+    ctx.body = result
+  }
+
+  async getUserByKeyword(ctx) {
+    const result = await userService.getUserByKeyword(ctx.request.body)
+    ctx.body = result
+  }
+
+  async updateUserInfo(ctx) {
+    const { id } = ctx.request.params
+    const updateInfo = ctx.request.body
+    const result = await userService.updateInfo(id, updateInfo)
+    ctx.body = result
   }
 }
 

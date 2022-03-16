@@ -12,7 +12,8 @@ class CategoryController {
   }
 
   async getList(ctx) {
-    const result = await categoryService.getList()
+    // console.log(ctx.request.body)
+    const result = await categoryService.getList(ctx.request.body)
     ctx.body = result
   }
 

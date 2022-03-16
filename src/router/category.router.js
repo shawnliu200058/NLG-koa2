@@ -1,6 +1,10 @@
 const Router = require('@koa/router')
 
-const { create, getList, getIcon } = require('../controller/category.controller')
+const {
+  create,
+  getList,
+  getIcon
+} = require('../controller/category.controller')
 
 const categoryRouter = new Router({ prefix: '/category' })
 
@@ -8,7 +12,7 @@ const categoryRouter = new Router({ prefix: '/category' })
 categoryRouter.post('/', create)
 
 // 获取分类列表
-categoryRouter.get('/list', getList)
+categoryRouter.post('/list', getList)
 
 // 获取分类图标
 categoryRouter.get('/:categoryId/icon', getIcon)
