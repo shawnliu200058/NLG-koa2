@@ -3,18 +3,20 @@ const addressService = require('../service/address.service')
 
 class UserController {
   async create(ctx, next) {
-    const { userInfo, openid } = ctx.request.body
-
+    // const { userInfo, openid } = ctx.request.body
     // 验证用户是否初次登录
-    const isExistUser = await userService.getUserByOpenid(openid)
-
+    // const isExistUser = await userService.getUserByOpenid(openid)
     // 初次登录
-    if (!isExistUser) {
-      // 创建用户
-      const result = await userService.create(userInfo, openid)
-      ctx.body = result
-    }
-    ctx.body = { msg: '登录成功', user: isExistUser }
+    // if (!isExistUser) {
+    //   // 创建用户
+    //   const result = await userService.create(userInfo, openid)
+    //   ctx.body = result
+    // }
+    // ctx.body = { msg: '登录成功', user: isExistUser }
+
+    // console.log(ctx.user)
+    const result = await userService.create(ctx.user)
+    ctx.body = result
   }
 
   // 创建用户收货地址

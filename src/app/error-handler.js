@@ -2,8 +2,17 @@ const errorTypes = require('../constants/error-types')
 
 const errorHandler = (error, ctx) => {
   let status, message
+  // console.log(error)
 
   switch (error.message) {
+    case errorTypes.USER_ALREADY_EXISTS:
+      status = 409 // conflict
+      message = '用户已经存在~'
+      break
+    case errorTypes.USER_DOES_NOT_EXISTS:
+      status = 400 // 参数错误
+      message = '用户不存在~'
+      break
     case errorTypes.ADMIN_ALREADY_EXISTS:
       status = 409 // conflict
       message = '管理员已经存在~'
@@ -29,7 +38,7 @@ const errorHandler = (error, ctx) => {
       message = 'NOT FOUND'
   }
   // ctx.status = status
-  ctx.body = { returnCode: status, message }
+  ctx.body = { errMsg: message }
 }
 
 module.exports = errorHandler

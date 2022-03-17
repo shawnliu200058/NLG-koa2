@@ -12,8 +12,7 @@ class GoodService {
       stock,
       address
     } = goodForm
-    const statement = 
-      `INSERT INTO good (name, category_id, detail, price, unit, specification, stock, good_address)
+    const statement = `INSERT INTO good (name, category_id, detail, price, unit, specification, stock, good_address)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
 
     const result = await promisePool.execute(statement, [
@@ -30,15 +29,19 @@ class GoodService {
     return result
   }
 
-  async getGoodList() {
+  async getGoodList(queryInfo) {
+    const { offset, limit } = queryInfo
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
         good.sale, good.stock, good.good_address, good.displayPicUrl, good.collect_userId,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id
-      GROUP BY good.id`
+      GROUP BY good.id LIMIT ? OFFSET ?`
 
-    const [result] = await promisePool.execute(statement)
+    const [result] = await promisePool.execute(statement, [
+      `${limit}`,
+      `${offset}`
+    ])
     return result
   }
 

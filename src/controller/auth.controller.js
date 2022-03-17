@@ -4,7 +4,17 @@ const { PRIVATE_KEY } = require('../app/config')
 
 class AuthController {
   async login(ctx) {
-    const { id, name } = ctx.admin
+    let id = null,
+      name = null
+
+    if (ctx.user) {
+      id = ctx.user.id
+      name = ctx.user.nickName
+    } else {
+      id = ctx.admin.id
+      name = ctx.admin.name
+    }
+
     const token = jwt.sign({ id, name }, PRIVATE_KEY, {
       expiresIn: 60 * 60 * 24,
       algorithm: 'RS256'

@@ -33,6 +33,6 @@ fileRouter.post('/displayPic/:goodId', displayPicHandler, saveDisplayPic)
 // 上传商品详情图
 fileRouter.post('/detailPic/:goodId', detailPicHandler, saveDetailPic)
 
-fileRouter.post('/test/:goodId',  testImgHandler)
+fileRouter.post('/test/:goodId', testImgHandler)
 
 module.exports = fileRouter

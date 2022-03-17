@@ -15,7 +15,7 @@ class GoodController {
   }
 
   async getGoodList(ctx) {
-    const result = await goodService.getGoodList()
+    const result = await goodService.getGoodList(ctx.request.body)
     ctx.body = result
   }
 

@@ -1,18 +1,35 @@
 const promisePool = require('../app/database')
 
 class UserService {
-  async create(userInfo, openid) {
-    const { nickName, gender, avatarUrl } = userInfo
-    // 初次登录，创建用户并存入数据库
-    const statement = `INSERT INTO user (openid, nickName, gender, avatarUrl) VALUES (?, ?, ?, ?)`
+  // async create(userInfo, openid) {
+  //   const { nickName, gender, avatarUrl } = userInfo
+  //   // 初次登录，创建用户并存入数据库
+  //   const statement = `INSERT INTO user (openid, nickName, gender, avatarUrl) VALUES (?, ?, ?, ?)`
 
-    const [result] = await promisePool.execute(statement, [
-      openid,
-      nickName,
-      gender,
-      avatarUrl
-    ])
+  //   const [result] = await promisePool.execute(statement, [
+  //     openid,
+  //     nickName,
+  //     gender,
+  //     avatarUrl
+  //   ])
 
+  //   return result
+  // }
+
+  async create(user) {
+    console.log(user)
+    const { name, password } = user
+    const statement = `INSERT INTO user (nickName, password) VALUES (?, ?)`
+    const [result] = await promisePool.execute(statement, [name, password])
+
+    return result
+  }
+
+  async getUserByName(name) {
+    // console.log(name)
+    const statement = `SELECT * FROM user WHERE nickName = ?`
+    const [result] = await promisePool.execute(statement, [name])
+    // console.log(result)
     return result
   }
 

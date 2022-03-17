@@ -14,7 +14,7 @@ const goodRouter = new Router({ prefix: '/good' })
 // 创建商品
 goodRouter.post('/create', create)
 // 获取所有商品信息
-goodRouter.get('/list', verifyAuth, getGoodList)
+goodRouter.post('/list', getGoodList)
 // 获取该商品下展示图
 goodRouter.get('/:goodId/display_pic', getDisplayPicByGoodId)
 // 获取该商品下详情图

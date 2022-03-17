@@ -1,7 +1,7 @@
 const Router = require('@koa/router')
 
-const { verifyAuth } = require('../middleware/auth.middleware')
-
+const { verifyLogin, verifyAuth } = require('../middleware/auth.middleware')
+const { verifyUser } = require('../middleware/user.middleware')
 const {
   create,
   addDeliverAddress,
@@ -12,11 +12,16 @@ const {
   getUserByKeyword,
   updateUserInfo
 } = require('../controller/user.controller')
+const { login } = require('../controller/auth.controller')
+
+const { reg_login_schema } = require('../schema/admin.schema')
 
 const userRouter = new Router({ prefix: '/user' })
 
-// 小程序用户授权登录，将用户信息存入数据库
-userRouter.post('/login', create)
+// 用户注册
+userRouter.post('/register', verifyUser(reg_login_schema), create)
+// 用户登录
+userRouter.post('/login', verifyLogin(reg_login_schema), login)
 // 新增用户收货地址
 userRouter.post('/address/add', addDeliverAddress)
 // 获取用户收获地址
