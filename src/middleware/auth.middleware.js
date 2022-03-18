@@ -43,6 +43,7 @@ class AuthMiddleware {
         }
         // 4.判断密码是否和数据库中的密码是一致(加密)
         const admin = result[0]
+        // console.log(admin.password === md5password(password))
         if (md5password(password) !== admin.password) {
           const error = new Error(errorTypes.PASSWORD_IS_INCORRENT)
           return ctx.app.emit('error', error, ctx)
@@ -56,7 +57,7 @@ class AuthMiddleware {
 
   async verifyAuth(ctx, next) {
     const { authorization } = ctx.headers
-    console.log(authorization)
+    // console.log(authorization)
 
     if (!authorization) {
       const error = new Error(errorTypes.UNAUTHORIZED)

@@ -28,7 +28,8 @@ class UserController {
   }
 
   async getDeliveryAddress(ctx) {
-    const result = await addressService.get()
+    // console.log(ctx.request.params.userId)
+    const result = await addressService.get(ctx.request.params.userId)
     ctx.body = result
   }
 

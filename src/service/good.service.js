@@ -10,10 +10,11 @@ class GoodService {
       unit,
       specification,
       stock,
-      address
+      address,
+      userId
     } = goodForm
-    const statement = `INSERT INTO good (name, category_id, detail, price, unit, specification, stock, good_address)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+    const statement = `INSERT INTO good (name, category_id, detail, price, unit, specification, stock, good_address, user_id)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
 
     const result = await promisePool.execute(statement, [
       name,
@@ -23,7 +24,8 @@ class GoodService {
       unit,
       specification,
       stock,
-      address
+      address,
+      userId
     ])
 
     return result

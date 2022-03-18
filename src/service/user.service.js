@@ -46,11 +46,12 @@ class UserService {
     if (queryInfo.hasOwnProperty('nickName')) {
       // console.log(queryInfo)
       const { nickName, gender } = queryInfo
+      // console.log(nickName, gender)
       // limit 和 offset 要为 string 类型
-      const statement = `SELECT * FROM user WHERE nickName LIKE ? AND gender = ? LIMIT ? OFFSET ?`
+      const statement = `SELECT * FROM user WHERE nickName LIKE ? AND gender LIKE ? LIMIT ? OFFSET ?`
       const [result] = await promisePool.execute(statement, [
         `%${nickName}%`,
-        gender,
+        `%${gender}%`,
         `${limit}`,
         `${offset}`
       ])

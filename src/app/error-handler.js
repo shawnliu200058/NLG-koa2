@@ -37,7 +37,7 @@ const errorHandler = (error, ctx) => {
       status = 404
       message = 'NOT FOUND'
   }
-  // ctx.status = status
+  ctx.status = 200
   ctx.body = { errMsg: message }
 }
 

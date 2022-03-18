@@ -10,6 +10,7 @@ const {
 
 class GoodController {
   async create(ctx) {
+    console.log(ctx.request.body)
     const result = await goodService.create(ctx.request.body)
     ctx.body = result
   }

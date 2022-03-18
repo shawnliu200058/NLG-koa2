@@ -25,7 +25,7 @@ userRouter.post('/login', verifyLogin(reg_login_schema), login)
 // 新增用户收货地址
 userRouter.post('/address/add', addDeliverAddress)
 // 获取用户收获地址
-userRouter.get('/address', getDeliveryAddress)
+userRouter.get('/address/:userId?', getDeliveryAddress)
 // 修改用户收货地址
 userRouter.put('/address/modify/:id', modifyDeliveryAddress)
 // 删除用户收货地址

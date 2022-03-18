@@ -30,10 +30,18 @@ class AddressService {
     return result
   }
 
-  async get() {
-    const statement = `SELECT * FROM delivery_address`
-    const [result] = await promisePool.execute(statement)
-    return result
+  async get(userId) {
+    // console.log(userId)
+    if (userId) {
+      const statement = `SELECT * FROM delivery_address WHERE user_id = ?`
+      const [result] = await promisePool.execute(statement, [userId])
+      console.log(result)
+      return result
+    } else {
+      const statement = `SELECT * FROM delivery_address`
+      const [result] = await promisePool.execute(statement)
+      return result
+    }
   }
 
   async modify(addressInfo, addressId) {
@@ -41,8 +49,8 @@ class AddressService {
     const { realName, phone, address, house, isDefault } = addressInfo
 
     const getUserId = `SELECT user_id FROM delivery_address WHERE id = ?`
-      const [result1] = await promisePool.execute(getUserId, [addressId])
-      const user_id = result1.pop().user_id
+    const [result1] = await promisePool.execute(getUserId, [addressId])
+    const user_id = result1.pop().user_id
 
     // 若需要设置新的默认地址
     await this.updateDefaultAddress(isDefault, user_id)
@@ -56,7 +64,7 @@ class AddressService {
       isDefault,
       addressId
     ])
-    console.log(result2)
+    // console.log(result2)
 
     return result2
   }
