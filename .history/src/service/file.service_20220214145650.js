@@ -1,1 +1,0 @@
-const promisePool = require('../app/')

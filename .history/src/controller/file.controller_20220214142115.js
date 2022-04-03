@@ -1,1 +1,0 @@
-const {APP_H} = require('../app/config')

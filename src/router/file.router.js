@@ -4,13 +4,15 @@ const {
   categoryIconHandler,
   detailPicHandler,
   displayPicHandler,
+  delOldFile,
   testImgHandler
 } = require('../middleware/file.middleware')
 const {
   saveCategoryIcon,
   saveDisplayPic,
   saveDetailPic,
-  saveTestFile
+  saveTestFile,
+  delTestFile
 } = require('../controller/file.controller')
 
 // const { verifyAuth } = require('../middleware/auth.middleware')
@@ -27,12 +29,25 @@ const {
 const fileRouter = new Router({ prefix: '/upload' })
 
 // 上传分类图标
-fileRouter.post('/categoryIcon', categoryIconHandler, saveCategoryIcon)
+fileRouter.post(
+  '/categoryIcon/:categoryId',
+  categoryIconHandler,
+  saveCategoryIcon
+)
+// 更新分类图标
+fileRouter.patch(
+  '/categoryIcon/:categoryId',
+  delOldFile,
+  categoryIconHandler,
+  saveCategoryIcon
+)
 // 上传商品展示图
 fileRouter.post('/displayPic/:goodId', displayPicHandler, saveDisplayPic)
 // 上传商品详情图
 fileRouter.post('/detailPic/:goodId', detailPicHandler, saveDetailPic)
 
-fileRouter.post('/test/:goodId', testImgHandler)
+fileRouter.post('/test/:goodId', testImgHandler, saveTestFile)
+// 删除测试文件接口
+fileRouter.delete('/test', delTestFile)
 
 module.exports = fileRouter

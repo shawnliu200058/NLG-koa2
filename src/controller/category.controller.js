@@ -25,6 +25,14 @@ class CategoryController {
     ctx.response.set('content-type', iconInfo.mimetype)
     ctx.body = fs.createReadStream(`${CATEGORY_ICON_PATH}/${iconInfo.filename}`)
   }
+
+  async updateCategoryInfo(ctx) {
+    const { id } = ctx.params
+    const updateInfo = ctx.request.body
+    // console.log(id, updateInfo)
+    const result = await categoryService.updateInfo(id, updateInfo)
+    ctx.body = result
+  }
 }
 
 module.exports = new CategoryController()

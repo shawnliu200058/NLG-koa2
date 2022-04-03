@@ -11,6 +11,16 @@ class FileService {
     return result
   }
 
+  async updateCategoryIcon(filename, mimetype, categoryId) {
+    const statement = `UPDATE category_icon SET filename = ?, mimetype = ? WHERE category_id = ?`
+    const [result] = await promisePool.execute(statement, [
+      filename,
+      mimetype,
+      categoryId
+    ])
+    return result
+  }
+
   async getCategoryIconById(categoryId) {
     const statement = `SELECT * FROM category_icon WHERE category_id = ?;`
     const [result] = await promisePool.execute(statement, [categoryId])

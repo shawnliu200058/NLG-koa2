@@ -28,6 +28,13 @@ class CategoryService {
     const [result] = await promisePool.execute(statement, [iconUrl, categoryId])
     return result
   }
+
+  async updateInfo(categoryId, updateInfo) {
+    const { name } = updateInfo
+    const statement = `UPDATE category SET name = ? WHERE id = ?;`
+    const [result] = await promisePool.execute(statement, [name, categoryId])
+    return result
+  }
 }
 
 module.exports = new CategoryService()
