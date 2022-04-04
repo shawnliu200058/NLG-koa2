@@ -37,8 +37,8 @@ const delOldFile = async (ctx, next) => {
       if (err) throw err
       console.log('文件已删除')
     })
+    ctx.isUpdateAction = 1
   }
-  ctx.isUpdateAction = 1
   // next 前面记得加 await
   await next()
 }

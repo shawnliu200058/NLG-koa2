@@ -35,6 +35,12 @@ class CategoryService {
     const [result] = await promisePool.execute(statement, [name, categoryId])
     return result
   }
+
+  async delInfo(categoryId) {
+    const statement = `DELETE FROM category WHERE id = ?`
+    const [result] = await promisePool.execute(statement, [categoryId])
+    return result
+  }
 }
 
 module.exports = new CategoryService()

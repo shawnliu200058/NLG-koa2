@@ -4,8 +4,11 @@ const {
   create,
   getList,
   getIcon,
-  updateCategoryInfo
+  updateCategoryInfo,
+  delCategory
 } = require('../controller/category.controller')
+
+const { delOldFile } = require('../middleware/file.middleware')
 
 const categoryRouter = new Router({ prefix: '/category' })
 
@@ -17,5 +20,7 @@ categoryRouter.post('/list', getList)
 categoryRouter.get('/:categoryId/:filename', getIcon)
 // 更新分类信息
 categoryRouter.patch('/:id', updateCategoryInfo)
+// 删除分类信息
+categoryRouter.delete('/:categoryId', delOldFile, delCategory)
 
 module.exports = categoryRouter

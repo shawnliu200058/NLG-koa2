@@ -22,7 +22,7 @@ class FileController {
       const iconUrl = `${APP_HOST}:${APP_PORT}/category/${categoryId}/${filename}`
       // 将图像地址保存到 category 表中
       await categoryService.updateIconById(iconUrl, categoryId)
-      return (ctx.body = { msg: '更新分类图标成功', categoryId })
+      ctx.body = { msg: '更新分类图标成功', categoryId }
     }
     // 插入图像信息数据到 category_icon 表中
     else {

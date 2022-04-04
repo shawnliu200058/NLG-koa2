@@ -6,6 +6,7 @@ const { CATEGORY_ICON_PATH } = require('../constants/file-path')
 
 class CategoryController {
   async create(ctx) {
+    // console.log(ctx.request.body)
     const { name } = ctx.request.body
     const result = await categoryService.create(name)
     ctx.body = result
@@ -18,8 +19,10 @@ class CategoryController {
   }
 
   async getIcon(ctx) {
+    console.log(ctx.params)
     const { categoryId } = ctx.params
     const iconInfo = await fileService.getCategoryIconById(categoryId)
+    console.log(iconInfo)
 
     // 提供图像信息
     ctx.response.set('content-type', iconInfo.mimetype)
@@ -31,6 +34,14 @@ class CategoryController {
     const updateInfo = ctx.request.body
     // console.log(id, updateInfo)
     const result = await categoryService.updateInfo(id, updateInfo)
+    console.log(result)
+    ctx.body = result
+  }
+
+  async delCategory(ctx) {
+    const { categoryId } = ctx.params
+    // console.log(id)
+    const result = await categoryService.delInfo(categoryId)
     ctx.body = result
   }
 }
