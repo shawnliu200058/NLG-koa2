@@ -1,5 +1,7 @@
 const promisePool = require('../app/database')
 
+const publicService = require('./public/public.service')
+
 class CategoryService {
   async create(name) {
     const statement = `INSERT INTO category (name) VALUES (?)`
@@ -16,11 +18,13 @@ class CategoryService {
    FROM category LEFT JOIN good 
    ON good.category_id = category.id
    GROUP BY category.id LIMIT ? OFFSET ?`
-    const [result] = await promisePool.execute(statement, [
+    const [list] = await promisePool.execute(statement, [
       `${limit}`,
       `${offset}`
     ])
-    return result
+
+    const [res] = await publicService.getListCount('category')
+    return { categoryList: { totalCount: res.totalCount, list } }
   }
 
   async updateIconById(iconUrl, categoryId) {

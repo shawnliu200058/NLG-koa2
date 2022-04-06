@@ -1,5 +1,7 @@
 const promisePool = require('../app/database')
 
+const publicService = require('./public/public.service')
+
 class GoodService {
   async create(goodForm) {
     const {
@@ -34,17 +36,25 @@ class GoodService {
   async getGoodList(queryInfo) {
     const { offset, limit } = queryInfo
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
-        good.sale, good.stock, good.good_address, good.displayPicUrl, good.collect_userId,
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id
       GROUP BY good.id LIMIT ? OFFSET ?`
 
-    const [result] = await promisePool.execute(statement, [
+    const [list] = await promisePool.execute(statement, [
       `${limit}`,
       `${offset}`
     ])
-    return result
+
+    const [res] = await publicService.getListCount('good')
+    return { goodList: { totalCount: res.totalCount, list } }
+  }
+
+  async getGoodsCount() {
+    const statement = `SELECT COUNT(*) totalCount FROM good`
+    const [result] = await promisePool.execute(statement)
+    return result.pop()
   }
 
   async updateGoodById(displayPicUrl, goodId) {
@@ -53,7 +63,7 @@ class GoodService {
       displayPicUrl,
       goodId
     ])
-    return result
+    return resultx
   }
 
   async getGoodsByKeyword(keyword) {

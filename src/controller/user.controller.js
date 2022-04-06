@@ -48,7 +48,9 @@ class UserController {
   }
 
   async getUserList(ctx) {
+    // console.log(ctx.request.body)
     const result = await userService.getList(ctx.request.body)
+    // console.log(result)
     ctx.body = result
   }
 
