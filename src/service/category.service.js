@@ -23,8 +23,8 @@ class CategoryService {
       `${offset}`
     ])
 
-    const [res] = await publicService.getListCount('category')
-    return { categoryList: { totalCount: res.totalCount, list } }
+    const totalCount = await publicService.getListCount('category')
+    return { categoryList: { totalCount, list } }
   }
 
   async updateIconById(iconUrl, categoryId) {

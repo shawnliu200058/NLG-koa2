@@ -7,10 +7,15 @@ class OrderController {
   }
 
   async getOrderInfo(ctx) {
-    const { userId } = ctx.request.query
+    const { userId } = ctx.request.body
     // console.log(userId)
-    const result = await service.get(userId)
-    ctx.body = result
+    if (userId) {
+      const result = await service.getById(userId)
+      ctx.body = result
+    } else {
+      const result = await service.get()
+      ctx.body = result
+    }
   }
 
   async delOrderInfo(ctx) {

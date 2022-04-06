@@ -47,8 +47,33 @@ class GoodService {
       `${offset}`
     ])
 
-    const [res] = await publicService.getListCount('good')
-    return { goodList: { totalCount: res.totalCount, list } }
+    const totalCount = await publicService.getListCount('good')
+    // console.log(totalCount)
+    return { goodList: { totalCount, list } }
+  }
+
+  async getGoodListById(queryInfo, categoryId) {
+    // console.log(categoryId)
+    const { offset, limit } = queryInfo
+    const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
+	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
+      FROM good LEFT JOIN detail_pic 
+      ON good.id = detail_pic.good_id WHERE category_id = ?
+      GROUP BY good.id LIMIT ? OFFSET ?`
+
+    const [list] = await promisePool.execute(statement, [
+      categoryId,
+      `${limit}`,
+      `${offset}`
+    ])
+    const totalCount = await publicService.getListCountById(
+      'good',
+      'category_id',
+      categoryId
+    )
+
+    return { goodList: { totalCount, list } }
   }
 
   async getGoodsCount() {

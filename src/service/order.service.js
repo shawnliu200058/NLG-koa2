@@ -1,5 +1,7 @@
 const promisePool = require('../app/database')
 
+const publicService = require('./public/public.service')
+
 class OrderService {
   async create(info) {
     const { deliveryAddress, goodList, remark, totalPrice } = info
@@ -25,10 +27,26 @@ class OrderService {
     return result
   }
 
-  async get(userId) {
+  async get() {
+    const statement = `SELECT * FROM my_order`
+    const [list] = await promisePool.execute(statement)
+
+    const totalCount = await publicService.getListCount('my_order')
+    // console.log(totalCount)
+    return { orderList: { totalCount, list } }
+  }
+
+  async getById(userId) {
     const statement = `SELECT * FROM my_order WHERE user_id = ?`
-    const [result] = await promisePool.execute(statement, [userId])
-    return result
+    const [list] = await promisePool.execute(statement, [userId])
+
+    const totalCount = await publicService.getListCountById(
+      'my_order',
+      'user_id',
+      userId
+    )
+    // console.log(totalCount)
+    return { orderList: { totalCount, list } }
   }
 
   async delete(orderId) {

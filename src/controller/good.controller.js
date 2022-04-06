@@ -16,8 +16,18 @@ class GoodController {
   }
 
   async getGoodList(ctx) {
-    const result = await goodService.getGoodList(ctx.request.body)
-    ctx.body = result
+    // console.log(ctx.query.categoryId)
+    const { categoryId } = ctx.request.body
+
+    let result = null
+    if (categoryId) {
+      // console.log(categoryId)
+      result = await goodService.getGoodListById(ctx.request.body, categoryId)
+      ctx.body = result
+    } else {
+      result = await goodService.getGoodList(ctx.request.body)
+      ctx.body = result
+    }
   }
 
   async getDisplayPicByGoodId(ctx) {
