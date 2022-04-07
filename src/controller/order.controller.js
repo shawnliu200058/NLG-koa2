@@ -2,6 +2,7 @@ const service = require('../service/order.service')
 
 class OrderController {
   async create(ctx) {
+    // console.log(ctx.request.body)
     const result = await service.create(ctx.request.body)
     ctx.body = result
   }

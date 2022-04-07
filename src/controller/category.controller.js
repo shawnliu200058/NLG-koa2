@@ -19,10 +19,10 @@ class CategoryController {
   }
 
   async getIcon(ctx) {
-    console.log(ctx.params)
+    // console.log(ctx.params)
     const { categoryId } = ctx.params
     const iconInfo = await fileService.getCategoryIconById(categoryId)
-    console.log(iconInfo)
+    // console.log(iconInfo)
 
     // 提供图像信息
     ctx.response.set('content-type', iconInfo.mimetype)
@@ -34,7 +34,7 @@ class CategoryController {
     const updateInfo = ctx.request.body
     // console.log(id, updateInfo)
     const result = await categoryService.updateInfo(id, updateInfo)
-    console.log(result)
+    // console.log(result)
     ctx.body = result
   }
 

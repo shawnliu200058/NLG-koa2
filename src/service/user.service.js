@@ -35,9 +35,9 @@ class UserService {
     return result
   }
 
-  async getUserByOpenid(openid) {
-    const statement = `SELECT * FROM user where openid = ?`
-    const [result] = await promisePool.execute(statement, [openid])
+  async getUserById(id) {
+    const statement = `SELECT * FROM user WHERE id = ?`
+    const [result] = await promisePool.execute(statement, [id])
     return result.pop()
   }
 

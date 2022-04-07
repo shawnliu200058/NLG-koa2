@@ -30,12 +30,12 @@ class AddressService {
     return result
   }
 
-  async get(userId) {
+  async get(userId = null) {
     // console.log(userId)
     if (userId) {
       const statement = `SELECT * FROM delivery_address WHERE user_id = ?`
       const [result] = await promisePool.execute(statement, [userId])
-      console.log(result)
+      // console.log(result)
       return result
     } else {
       const statement = `SELECT * FROM delivery_address`

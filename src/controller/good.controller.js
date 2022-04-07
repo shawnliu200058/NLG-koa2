@@ -10,7 +10,7 @@ const {
 
 class GoodController {
   async create(ctx) {
-    console.log(ctx.request.body)
+    // console.log(ctx.request.body)
     const result = await goodService.create(ctx.request.body)
     ctx.body = result
   }
@@ -33,7 +33,7 @@ class GoodController {
   async getDisplayPicByGoodId(ctx) {
     const { goodId } = ctx.params
     const [picInfo] = await fileService.getGoodPicById('display_pic', goodId)
-    console.log(picInfo)
+    // console.log(picInfo)
 
     // 提供图像信息
     ctx.response.set('content-type', picInfo.mimetype)
@@ -44,7 +44,7 @@ class GoodController {
     const { goodId } = ctx.params
     // 获取该商品下的所有详情图
     const picInfo = await fileService.getGoodPicById('detail_pic', goodId)
-    console.log(picInfo)
+    // console.log(picInfo)
     // 获取第一个数组元素，后面的一样
     const { good_id, mimetype } = picInfo[0]
 
