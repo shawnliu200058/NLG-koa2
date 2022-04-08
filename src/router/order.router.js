@@ -13,6 +13,6 @@ orderRouter.post('/add', create)
 // 获取用户订单信息
 orderRouter.post('/list', getOrderInfo)
 // 删除用户订单
-orderRouter.delete('/delete/:id', delOrderInfo)
+orderRouter.delete('/:id', delOrderInfo)
 
 module.exports = orderRouter

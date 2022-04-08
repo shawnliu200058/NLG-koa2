@@ -21,6 +21,7 @@ class OrderController {
 
   async delOrderInfo(ctx) {
     const { id } = ctx.request.params
+    // console.log(id)
     const result = await service.delete(id)
     ctx.body = result
   }
