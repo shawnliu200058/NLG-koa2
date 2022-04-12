@@ -1,3 +1,4 @@
+const { off } = require('../app/database')
 const promisePool = require('../app/database')
 
 const publicService = require('./public/public.service')
@@ -88,13 +89,30 @@ class GoodService {
       displayPicUrl,
       goodId
     ])
-    return resultx
+    return result
   }
 
   async getGoodsByKeyword(keyword) {
     const statement = `SELECT * FROM good WHERE name LIKE ?`
     const [result] = await promisePool.execute(statement, [`%${keyword}%`])
     return result
+  }
+
+  async getPublish(userId, queryInfo) {
+    const { offset, limit } = queryInfo
+    const statement = `SELECT * FROM good WHERE user_id = ? LIMIT ? OFFSET ?`
+    const [list] = await promisePool.execute(statement, [
+      userId,
+      `${limit}`,
+      `${offset}`
+    ])
+    // console.log(list)
+    const totalCount = await publicService.getListCountById(
+      'good',
+      'user_id',
+      userId
+    )
+    return { publishList: { totalCount, list } }
   }
 }
 

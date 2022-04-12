@@ -5,7 +5,8 @@ const {
   getGoodList,
   getDisplayPicByGoodId,
   getDetailPicByGoodId,
-  getGoodByKeyword
+  getGoodByKeyword,
+  getPublish
 } = require('../controller/good.controller')
 const { verifyAuth } = require('../middleware/auth.middleware')
 
@@ -21,5 +22,7 @@ goodRouter.get('/:goodId/display_pic', getDisplayPicByGoodId)
 goodRouter.get('/:goodId/detail_pic', getDetailPicByGoodId)
 // 模糊查询
 goodRouter.get('/query', getGoodByKeyword)
+// 获取用户发布
+goodRouter.post('/getPublish', getPublish)
 
 module.exports = goodRouter

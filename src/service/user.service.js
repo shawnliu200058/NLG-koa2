@@ -76,9 +76,9 @@ class UserService {
       `${offset}`
     ])
 
-    const [res] = await publicService.getListCount('user')
+    const totalCount = await publicService.getListCount('user')
     // console.log(res)
-    return { userList: { totalCount: res.totalCount, list } }
+    return { userList: { totalCount, list } }
   }
 
   // 编辑用户信息
