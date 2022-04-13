@@ -43,6 +43,33 @@ const delOldFile = async (ctx, next) => {
   await next()
 }
 
+const delGoodPic = async (ctx, next) => {
+  const { goodId } = ctx.request.query
+  // console.log(goodId)
+  const displayPic = await fileService.getGoodPicById('display_pic', goodId)
+  const detailPic = await fileService.getGoodPicById('detail_pic', goodId)
+  // console.log(displayPic, detailPic)
+  if (displayPic.length) {
+    const displayFilename = displayPic[0].filename
+    // console.log(displayFilename)
+    fs.unlink(`uploads/displayPic/${displayFilename}`, (err) => {
+      if (err) throw err
+      console.log('文件已删除')
+    })
+  }
+
+  if (detailPic.length) {
+    detailPic.forEach((item) => {
+      console.log(item.filename)
+      fs.unlink(`uploads/detailPic/${item.filename}`, (err) => {
+        if (err) throw err
+        console.log('文件已删除')
+      })
+    })
+  }
+  await next()
+}
+
 const testFileUpload = Multer({
   dest: TEST_PATH
 })
@@ -53,5 +80,6 @@ module.exports = {
   displayPicHandler,
   detailPicHandler,
   delOldFile,
+  delGoodPic,
   testImgHandler
 }

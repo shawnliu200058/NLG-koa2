@@ -6,9 +6,11 @@ const {
   getDisplayPicByGoodId,
   getDetailPicByGoodId,
   getGoodByKeyword,
-  getPublish
+  getPublish,
+  delPublish
 } = require('../controller/good.controller')
 const { verifyAuth } = require('../middleware/auth.middleware')
+const { delGoodPic } = require('../middleware/file.middleware')
 
 const goodRouter = new Router({ prefix: '/good' })
 
@@ -24,5 +26,7 @@ goodRouter.get('/:goodId/detail_pic', getDetailPicByGoodId)
 goodRouter.get('/query', getGoodByKeyword)
 // 获取用户发布
 goodRouter.post('/getPublish', getPublish)
+// 删除用户发布
+goodRouter.delete('/delPublish', delGoodPic, delPublish)
 
 module.exports = goodRouter

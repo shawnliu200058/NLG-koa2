@@ -72,6 +72,13 @@ class GoodController {
     const result = await goodService.getPublish(userId, ctx.request.body)
     ctx.body = result
   }
+
+  async delPublish(ctx) {
+    const { goodId } = ctx.request.query
+    // console.log(goodId)
+    const result = await goodService.delPublish(goodId)
+    ctx.body = goodId
+  }
 }
 
 module.exports = new GoodController()
