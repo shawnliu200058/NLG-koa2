@@ -126,6 +126,35 @@ class GoodService {
     const [result] = await promisePool.execute(statement, [goodId])
     return result
   }
+
+  async updatePublish(formData, goodId) {
+    console.log(formData)
+    const {
+      name,
+      categoryId,
+      detail,
+      price,
+      unit,
+      stock,
+      specification,
+      address
+    } = formData
+    const statement = `UPDATE good SET name = ?, category_id = ?, detail = ?, price = ?, 
+       unit = ?, specification = ?, stock = ?, good_address = ? WHERE id = ?`
+
+    const [result] = await promisePool.execute(statement, [
+      name,
+      categoryId,
+      detail,
+      price,
+      unit,
+      specification,
+      stock,
+      address,
+      goodId
+    ])
+    return result
+  }
 }
 
 module.exports = new GoodService()

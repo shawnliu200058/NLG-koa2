@@ -73,11 +73,18 @@ class GoodController {
     ctx.body = result
   }
 
+  async updatePublish(ctx) {
+    const { goodId } = ctx.request.params
+    // console.log(ctx.request.body)
+    const result = await goodService.updatePublish(ctx.request.body, goodId)
+    ctx.body = result
+  }
+
   async delPublish(ctx) {
     const { goodId } = ctx.request.query
     // console.log(goodId)
-    const result = await goodService.delPublish(goodId)
-    ctx.body = goodId
+    const result = await goodService.delPublish(ctx.request.body, goodId)
+    ctx.body = result
   }
 }
 

@@ -45,6 +45,8 @@ fileRouter.patch(
 fileRouter.post('/displayPic/:goodId', displayPicHandler, saveDisplayPic)
 // 上传商品详情图
 fileRouter.post('/detailPic/:goodId', detailPicHandler, saveDetailPic)
+// 更新用户发布商品图片
+fileRouter.patch('/goodPic/:goodId')
 
 fileRouter.post('/test/:goodId', testImgHandler, saveTestFile)
 // 删除测试文件接口
