@@ -5,7 +5,8 @@ const {
   detailPicHandler,
   displayPicHandler,
   delOldFile,
-  testImgHandler
+  testImgHandler,
+  delGoodPic
 } = require('../middleware/file.middleware')
 const {
   saveCategoryIcon,
@@ -38,15 +39,28 @@ fileRouter.post(
 fileRouter.patch(
   '/categoryIcon/:categoryId',
   delOldFile,
+  delGoodPic,
   categoryIconHandler,
   saveCategoryIcon
 )
 // 上传商品展示图
-fileRouter.post('/displayPic/:goodId', displayPicHandler, saveDisplayPic)
+fileRouter.post(
+  '/displayPic/:goodId',
+  delGoodPic,
+  displayPicHandler,
+  saveDisplayPic
+)
 // 上传商品详情图
 fileRouter.post('/detailPic/:goodId', detailPicHandler, saveDetailPic)
-// 更新用户发布商品图片
-fileRouter.patch('/goodPic/:goodId')
+// // 更新用户发布商品图片
+// fileRouter.patch(
+//   '/goodPic/:goodId',
+//   delGoodPic,
+//   displayPicHandler,
+//   saveDisplayPic,
+//   detailPicHandler,
+//   saveDetailPic
+// )
 
 fileRouter.post('/test/:goodId', testImgHandler, saveTestFile)
 // 删除测试文件接口

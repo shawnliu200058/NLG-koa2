@@ -128,7 +128,7 @@ class GoodService {
   }
 
   async updatePublish(formData, goodId) {
-    console.log(formData)
+    // console.log(formData)
     const {
       name,
       categoryId,

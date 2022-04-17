@@ -7,7 +7,7 @@ const errorHandler = require('./error-handler')
 
 const app = new Koa()
 
-app.use(cors()) 
+app.use(cors())
 app.useRoutes = useRoutes
 // 解析 body 数据
 app.use(bodyParser())

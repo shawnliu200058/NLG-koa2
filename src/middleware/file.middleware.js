@@ -43,8 +43,39 @@ const delOldFile = async (ctx, next) => {
   await next()
 }
 
+// async function delGoodPic(ctx, next) {
+//   const { goodId } = ctx.params
+//   console.log(ctx.request.body)
+//   // console.log(goodId)
+//   const displayPic = await fileService.getGoodPicById('display_pic', goodId)
+//   const detailPic = await fileService.getGoodPicById('detail_pic', goodId)
+//   // console.log(displayPic, detailPic)
+//   if (displayPic.length) {
+//     const displayFilename = displayPic[0].filename
+//     // console.log(displayFilename)
+//     fs.unlink(`uploads/displayPic/${displayFilename}`, (err) => {
+//       if (err) throw err
+//       console.log('展示图文件已删除')
+//     })
+//     await fileService.delFilename('display_pic', goodId)
+//   }
+
+//   if (detailPic.length) {
+//     detailPic.forEach((item) => {
+//       // console.log(item.filename)
+//       fs.unlink(`uploads/detailPic/${item.filename}`, (err) => {
+//         if (err) throw err
+//         console.log('详情图文件已删除')
+//       })
+//     })
+//     await fileService.delFilename('detail_pic', goodId)
+//   }
+//   await next()
+// }
+
 const delGoodPic = async (ctx, next) => {
-  const { goodId } = ctx.request.query
+  const { goodId } = ctx.params
+  // console.log(ctx.request.body)
   // console.log(goodId)
   const displayPic = await fileService.getGoodPicById('display_pic', goodId)
   const detailPic = await fileService.getGoodPicById('detail_pic', goodId)
@@ -54,18 +85,20 @@ const delGoodPic = async (ctx, next) => {
     // console.log(displayFilename)
     fs.unlink(`uploads/displayPic/${displayFilename}`, (err) => {
       if (err) throw err
-      console.log('文件已删除')
+      console.log('展示图文件已删除')
     })
+    await fileService.delFilename('display_pic', goodId)
   }
 
   if (detailPic.length) {
     detailPic.forEach((item) => {
-      console.log(item.filename)
+      // console.log(item.filename)
       fs.unlink(`uploads/detailPic/${item.filename}`, (err) => {
         if (err) throw err
-        console.log('文件已删除')
+        console.log('详情图文件已删除')
       })
     })
+    await fileService.delFilename('detail_pic', goodId)
   }
   await next()
 }

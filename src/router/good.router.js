@@ -28,7 +28,7 @@ goodRouter.get('/query', getGoodByKeyword)
 // 获取用户发布
 goodRouter.post('/getPublish', getPublish)
 // 删除用户发布
-goodRouter.delete('/delPublish', delGoodPic, delPublish)
+goodRouter.delete('/delPublish/:goodId', delGoodPic, delPublish)
 // 更新用户发布
 goodRouter.patch('/updatePublish/:goodId', updatePublish)
 

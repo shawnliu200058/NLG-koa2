@@ -39,6 +39,7 @@ class FileService {
   }
 
   async createDetailPic(filename, mimetype, url, goodId) {
+    // console.log(goodId, filename, url, mimetype)
     const statement = `INSERT INTO detail_pic (filename, mimetype, url, good_id) VALUES (?, ?, ?, ?)`
     const [result] = await promisePool.execute(statement, [
       filename,
@@ -52,6 +53,12 @@ class FileService {
   async getGoodPicById(tableName, goodId) {
     const statement = `SELECT * FROM ${tableName} WHERE good_id = ?`
     const [result] = await promisePool.execute(statement, [goodId])
+    return result
+  }
+
+  async delFilename(tableName, id) {
+    const statement = `DELETE FROM ${tableName} WHERE good_id = ?`
+    const [result] = await promisePool.execute(statement, [id])
     return result
   }
 }

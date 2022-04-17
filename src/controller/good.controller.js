@@ -81,9 +81,9 @@ class GoodController {
   }
 
   async delPublish(ctx) {
-    const { goodId } = ctx.request.query
+    const { goodId } = ctx.params
     // console.log(goodId)
-    const result = await goodService.delPublish(ctx.request.body, goodId)
+    const result = await goodService.delPublish(goodId)
     ctx.body = result
   }
 }

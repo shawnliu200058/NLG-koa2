@@ -35,6 +35,7 @@ class FileController {
   }
 
   async saveDisplayPic(ctx) {
+    console.log(ctx.request.body)
     const { goodId } = ctx.params
     const { filename, mimetype } = ctx.request.file
 
@@ -48,11 +49,11 @@ class FileController {
 
   async saveDetailPic(ctx) {
     const { goodId } = ctx.params
-    ctx.body = goodId
+    // ctx.body = goodId
     const { filename, mimetype } = ctx.request.file
-    console.log(goodId, filename, mimetype)
+    // console.log(goodId, filename, mimetype)
     const url = `${APP_HOST}:${APP_PORT}/good/${goodId}/detail_pic?filename=${filename}`
-    await fileService.createDetailPic(filename, mimetype, url, goodId)
+    await fileService.createDetailPic(filename, 'image/png', url, goodId)
     ctx.body = '上传商品详情图片成功'
   }
 
