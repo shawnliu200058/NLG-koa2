@@ -35,7 +35,7 @@ class FileController {
   }
 
   async saveDisplayPic(ctx) {
-    console.log(ctx.request.body)
+    // console.log(ctx.request.body)
     const { goodId } = ctx.params
     const { filename, mimetype } = ctx.request.file
 

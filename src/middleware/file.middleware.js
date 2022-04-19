@@ -75,7 +75,8 @@ const delOldFile = async (ctx, next) => {
 
 const delGoodPic = async (ctx, next) => {
   const { goodId } = ctx.params
-  // console.log(ctx.request.body)
+  console.log(ctx.query)
+  const { isDelDetailPic } = ctx.query
   // console.log(goodId)
   const displayPic = await fileService.getGoodPicById('display_pic', goodId)
   const detailPic = await fileService.getGoodPicById('detail_pic', goodId)
@@ -90,7 +91,7 @@ const delGoodPic = async (ctx, next) => {
     await fileService.delFilename('display_pic', goodId)
   }
 
-  if (detailPic.length) {
+  if (detailPic.length && Number(isDelDetailPic)) {
     detailPic.forEach((item) => {
       // console.log(item.filename)
       fs.unlink(`uploads/detailPic/${item.filename}`, (err) => {
