@@ -65,6 +65,11 @@ class UserController {
     const result = await userService.updateInfo(id, updateInfo)
     ctx.body = result
   }
+
+  async changeUserPwd(ctx) {
+    const result = await userService.changePwd(ctx.modifyInfo)
+    ctx.body = result
+  }
 }
 
 module.exports = new UserController()

@@ -55,6 +55,25 @@ class AuthMiddleware {
     }
   }
 
+  async verifyPwd(ctx, next) {
+    const { id } = ctx.params
+    const { originalPwd, newPwd } = ctx.request.body
+    // console.log(ctx.request.body)
+
+    if (ctx.request.url.includes('user')) {
+      // 判断用户名是否存在的
+      const result = await userService.getUserById(id)
+      // console.log(result)
+      // 4.判断密码是否和数据库中的密码是一致(加密)
+      if (md5password(originalPwd) !== result.password) {
+        const error = new Error(errorTypes.PASSWORD_IS_INCORRENT)
+        return ctx.app.emit('error', error, ctx)
+      }
+      ctx.modifyInfo = { id, newPwd: md5password(newPwd) }
+      await next()
+    }
+  }
+
   async verifyAuth(ctx, next) {
     const { authorization } = ctx.headers
     // console.log(authorization)

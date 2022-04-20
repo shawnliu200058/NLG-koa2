@@ -19,7 +19,7 @@ class UserService {
   // }
 
   async create(user) {
-    console.log(user)
+    // console.log(user)
     const { name, password } = user
     const statement = `INSERT INTO user (nickName, password) VALUES (?, ?)`
     const [result] = await promisePool.execute(statement, [name, password])
@@ -93,6 +93,14 @@ class UserService {
       userId
     ])
     // console.log(result)
+    return result
+  }
+
+  async changePwd(modifyInfo) {
+    // console.log(modifyInfo)
+    const { id, newPwd } = modifyInfo
+    const statement = `UPDATE user SET password = ? WHERE id = ?`
+    const [result] = await promisePool.execute(statement, [newPwd, id])
     return result
   }
 

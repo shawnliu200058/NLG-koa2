@@ -1,6 +1,10 @@
 const Router = require('@koa/router')
 
-const { verifyLogin, verifyAuth } = require('../middleware/auth.middleware')
+const {
+  verifyLogin,
+  verifyAuth,
+  verifyPwd
+} = require('../middleware/auth.middleware')
 const { verifyUser } = require('../middleware/user.middleware')
 const {
   create,
@@ -10,7 +14,8 @@ const {
   delDeliveryAddress,
   getUserList,
   getUserByKeyword,
-  updateUserInfo
+  updateUserInfo,
+  changeUserPwd
 } = require('../controller/user.controller')
 const { login } = require('../controller/auth.controller')
 
@@ -36,5 +41,7 @@ userRouter.post('/list', verifyAuth, getUserList)
 userRouter.post('/query', verifyAuth, getUserByKeyword)
 // 更新用户信息
 userRouter.patch('/:id', updateUserInfo)
+// 修改密码
+userRouter.patch('/pwd/:id', verifyPwd, changeUserPwd)
 
 module.exports = userRouter
