@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken')
 
 const { PRIVATE_KEY } = require('../app/config')
 
+const userService = require('../service/user.service')
+
 class AuthController {
   async login(ctx) {
     let id = null,
@@ -20,7 +22,10 @@ class AuthController {
       algorithm: 'RS256'
     })
 
-    ctx.body = { id, name, token }
+    const result = await userService.getUserById(id)
+    result.token = token
+
+    ctx.body = result
   }
 }
 

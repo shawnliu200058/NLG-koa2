@@ -4,6 +4,7 @@ const { APP_HOST, APP_PORT } = require('../app/config')
 const fileService = require('../service/file.service')
 const categoryService = require('../service/category.service')
 const goodService = require('../service/good.service')
+const userService = require('../service/user.service')
 
 class FileController {
   async saveCategoryIcon(ctx) {
@@ -55,6 +56,17 @@ class FileController {
     const url = `${APP_HOST}:${APP_PORT}/good/${goodId}/detail_pic?filename=${filename}`
     await fileService.createDetailPic(filename, 'image/png', url, goodId)
     ctx.body = '上传商品详情图片成功'
+  }
+
+  async saveAvatar(ctx) {
+    const { userId } = ctx.params
+    const { filename, mimetype } = ctx.request.file
+    // console.log(ctx.request.file.filename)
+    const url = `${APP_HOST}:${APP_PORT}/user/${userId}/avatar?filename=${filename}`
+    // console.log(url)
+    await fileService.createAvatar(filename, 'image/png', userId)
+    await userService.updateAvatarById(url, userId)
+    ctx.body = { msg: '上传头像成功', userId }
   }
 
   async saveTestFile(ctx) {

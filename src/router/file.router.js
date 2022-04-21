@@ -4,7 +4,9 @@ const {
   categoryIconHandler,
   detailPicHandler,
   displayPicHandler,
+  avatarPicHandler,
   delOldFile,
+  delAvatar,
   testImgHandler,
   delGoodPic
 } = require('../middleware/file.middleware')
@@ -13,6 +15,7 @@ const {
   saveDisplayPic,
   saveDetailPic,
   saveTestFile,
+  saveAvatar,
   delTestFile
 } = require('../controller/file.controller')
 
@@ -39,7 +42,6 @@ fileRouter.post(
 fileRouter.patch(
   '/categoryIcon/:categoryId',
   delOldFile,
-  delGoodPic,
   categoryIconHandler,
   saveCategoryIcon
 )
@@ -52,6 +54,8 @@ fileRouter.post(
 )
 // 上传商品详情图
 fileRouter.post('/detailPic/:goodId', detailPicHandler, saveDetailPic)
+// 上传用户头像
+fileRouter.post('/avatar/:userId', delAvatar, avatarPicHandler, saveAvatar)
 // // 更新用户发布商品图片
 // fileRouter.patch(
 //   '/goodPic/:goodId',

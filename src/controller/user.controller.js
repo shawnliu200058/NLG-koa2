@@ -1,5 +1,9 @@
+const fs = require('fs')
+
 const userService = require('../service/user.service')
 const addressService = require('../service/address.service')
+const fileService = require('../service/file.service')
+const { AVATAR_PATH } = require('../constants/file-path')
 
 class UserController {
   async create(ctx, next) {
@@ -60,8 +64,9 @@ class UserController {
   }
 
   async updateUserInfo(ctx) {
-    const { id } = ctx.request.params
+    const { id } = ctx.params
     const updateInfo = ctx.request.body
+    // console.log(updateInfo.nickName)
     const result = await userService.updateInfo(id, updateInfo)
     ctx.body = result
   }
@@ -69,6 +74,25 @@ class UserController {
   async changeUserPwd(ctx) {
     const result = await userService.changePwd(ctx.modifyInfo)
     ctx.body = result
+  }
+
+  // 修改用户资料后需要重新向后端请求最新的信息
+  async retriveInfo(ctx) {
+    const { id } = ctx.params
+    // console.log(ctx.params)
+    const result = await userService.getUserById(id)
+    ctx.body = result
+  }
+
+  async getAvatar(ctx) {
+    // console.log(ctx.params)
+    const { userId } = ctx.params
+    const avatar = await fileService.getAvatarById(userId)
+    // console.log(avatar)
+
+    // 提供图像信息
+    ctx.response.set('content-type', avatar.mimetype)
+    ctx.body = fs.createReadStream(`${AVATAR_PATH}/${avatar.filename}`)
   }
 }
 

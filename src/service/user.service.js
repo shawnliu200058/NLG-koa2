@@ -84,15 +84,23 @@ class UserService {
   // 编辑用户信息
   async updateInfo(userId, updateInfo) {
     // console.log(userId, updateInfo)
-    const { nickName, gender } = updateInfo
+    const { nickName, gender, birthday } = updateInfo
 
-    const statement = `UPDATE user SET nickName = ?, gender = ? WHERE id = ?`
+    const statement = `UPDATE user SET nickName = ?, gender = ?, birthday = ?, email = ? WHERE id = ?`
     const [result] = await promisePool.execute(statement, [
       nickName,
       gender,
+      birthday,
+      updateInfo.email ? updateInfo.email : '',
       userId
     ])
     // console.log(result)
+    return result
+  }
+
+  async updateAvatarById(url, userId) {
+    const statement = `UPDATE user SET avatarUrl = ? WHERE id = ?;`
+    const [result] = await promisePool.execute(statement, [url, userId])
     return result
   }
 

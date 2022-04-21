@@ -50,16 +50,33 @@ class FileService {
     return result
   }
 
+  async createAvatar(filename, mimetype, userId) {
+    // console.log(filename, mimetype)
+    const statement = `INSERT INTO avatar_pic (filename, mimetype, user_id) VALUES (?, ?, ?)`
+    const [result] = await promisePool.execute(statement, [
+      filename,
+      mimetype,
+      userId
+    ])
+    return result
+  }
+
   async getGoodPicById(tableName, goodId) {
     const statement = `SELECT * FROM ${tableName} WHERE good_id = ?`
     const [result] = await promisePool.execute(statement, [goodId])
     return result
   }
 
-  async delFilename(tableName, id) {
-    const statement = `DELETE FROM ${tableName} WHERE good_id = ?`
+  async delFilename(tableName, fkName, id) {
+    const statement = `DELETE FROM ${tableName} WHERE ${fkName} = ?`
     const [result] = await promisePool.execute(statement, [id])
     return result
+  }
+
+  async getAvatarById(userId) {
+    const statement = `SELECT * FROM avatar_pic WHERE user_id = ?`
+    const [result] = await promisePool.execute(statement, [userId])
+    return result.pop()
   }
 }
 
