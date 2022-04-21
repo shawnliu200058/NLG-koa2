@@ -90,7 +90,8 @@ const delAvatar = async (ctx, next) => {
       if (err) throw err
       console.log('原头像文件已删除')
     })
-    await fileService.delFilename('avatar_pic', 'user_id', userId)
+    // await fileService.delFilename('avatar_pic', 'user_id', userId)
+    ctx.isUpdateAction = 1
   }
   await next()
 }

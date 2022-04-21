@@ -61,6 +61,16 @@ class FileService {
     return result
   }
 
+  async updateAvatar(filename, mimetype, userId) {
+    const statement = `UPDATE avatar_pic SET filename = ?, mimetype = ? WHERE user_id = ?`
+    const [result] = await promisePool.execute(statement, [
+      filename,
+      mimetype,
+      userId
+    ])
+    return result
+  }
+
   async getGoodPicById(tableName, goodId) {
     const statement = `SELECT * FROM ${tableName} WHERE good_id = ?`
     const [result] = await promisePool.execute(statement, [goodId])

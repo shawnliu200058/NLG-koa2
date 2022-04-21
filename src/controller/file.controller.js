@@ -61,12 +61,17 @@ class FileController {
   async saveAvatar(ctx) {
     const { userId } = ctx.params
     const { filename, mimetype } = ctx.request.file
-    // console.log(ctx.request.file.filename)
     const url = `${APP_HOST}:${APP_PORT}/user/${userId}/avatar?filename=${filename}`
-    // console.log(url)
-    await fileService.createAvatar(filename, 'image/png', userId)
-    await userService.updateAvatarById(url, userId)
-    ctx.body = { msg: '上传头像成功', userId }
+
+    if (ctx.isUpdateAction) {
+      await fileService.updateAvatar(filename, mimetype, userId)
+      await userService.updateAvatarById(url, userId)
+      ctx.body = { msg: '上传头像成功', userId }
+    } else {
+      await fileService.createAvatar(filename, 'image/png', userId)
+      await userService.updateAvatarById(url, userId)
+      ctx.body = { msg: '上传头像成功', userId }
+    }
   }
 
   async saveTestFile(ctx) {
