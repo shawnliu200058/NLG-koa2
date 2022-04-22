@@ -21,19 +21,19 @@ class AuthMiddleware {
         // 判断用户名是否存在的
         const result = await userService.getUserByName(name)
         // console.log(result)
-        if (!result.length) {
+        if (!result) {
           const error = new Error(errorTypes.USER_DOES_NOT_EXISTS)
           return ctx.app.emit('error', error, ctx)
         }
         // 4.判断密码是否和数据库中的密码是一致(加密)
-        const user = result[0]
-        // console.log(md5password(password), user.password)
-        if (md5password(password) !== user.password) {
+        // const user = result[0]
+        // console.log(md5password(password), result.password)
+        if (md5password(password) !== result.password) {
           const error = new Error(errorTypes.PASSWORD_IS_INCORRENT)
           return ctx.app.emit('error', error, ctx)
         }
         // console.log(user)
-        ctx.user = user
+        ctx.user = result
       } else {
         // 判断管理员是否存在的
         const result = await adminService.getAdminByName(name)

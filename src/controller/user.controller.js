@@ -4,6 +4,7 @@ const userService = require('../service/user.service')
 const addressService = require('../service/address.service')
 const fileService = require('../service/file.service')
 const { AVATAR_PATH } = require('../constants/file-path')
+const errorTypes = require('../constants/error-types')
 
 class UserController {
   async create(ctx, next) {
@@ -66,6 +67,16 @@ class UserController {
   async updateUserInfo(ctx) {
     const { id } = ctx.params
     const updateInfo = ctx.request.body
+    const { nickName } = updateInfo
+
+    // 当前用户名是否在数据库中存在
+    const userInfo = await userService.getUserByName(nickName)
+    // console.log(typeof userInfo.id, typeof id)
+    if (userInfo && userInfo.id != id) {
+      // console.log(123)
+      const error = new Error(errorTypes.USER_ALREADY_EXISTS)
+      return ctx.app.emit('error', error, ctx)
+    }
     // console.log(updateInfo.nickName)
     const result = await userService.updateInfo(id, updateInfo)
     ctx.body = result

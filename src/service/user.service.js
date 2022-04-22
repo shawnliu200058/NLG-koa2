@@ -32,7 +32,7 @@ class UserService {
     const statement = `SELECT * FROM user WHERE nickName = ?`
     const [result] = await promisePool.execute(statement, [name])
     // console.log(result)
-    return result
+    return result.pop()
   }
 
   async getUserById(id) {
