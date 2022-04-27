@@ -14,7 +14,7 @@ class CategoryService {
     const { offset, limit } = queryInfo
     const statement = `SELECT category.id, category.name, category.icon_url,
    JSON_ARRAYAGG(JSON_OBJECT('id', good.id, 'name', good.name, 'price', good.price, 
-    'unit', good.unit, 'stock', good.stock, 'displayPicUrl', good.displayPicUrl)) goods
+    'unit', good.unit, 'stock', good.stock, 'displayPicUrl', good.displayPicUrl, 'status', good.status)) goods
    FROM category LEFT JOIN good 
    ON good.category_id = category.id
    GROUP BY category.id LIMIT ? OFFSET ?`

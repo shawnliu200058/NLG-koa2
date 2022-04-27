@@ -13,7 +13,8 @@ const alipaySdk = new AlipaySdk({
   privateKey: fs.readFileSync(
     path.resolve(__dirname, './keys/privateKey.pem'),
     'utf-8'
-  )
+  ),
+  charset: 'utf-8'
 })
 
 // const alipaySdk = () => {

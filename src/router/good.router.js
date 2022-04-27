@@ -8,7 +8,8 @@ const {
   getGoodByKeyword,
   getPublish,
   updatePublish,
-  delPublish
+  delPublish,
+  modifyStatus
 } = require('../controller/good.controller')
 const { verifyAuth } = require('../middleware/auth.middleware')
 const { delGoodPic } = require('../middleware/file.middleware')
@@ -31,5 +32,7 @@ goodRouter.post('/getPublish', getPublish)
 goodRouter.delete('/delPublish/:goodId', delGoodPic, delPublish)
 // 更新用户发布
 goodRouter.patch('/updatePublish/:goodId', updatePublish)
+// 更新商品状态
+goodRouter.patch('/status/:goodId', modifyStatus)
 
 module.exports = goodRouter

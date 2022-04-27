@@ -73,6 +73,8 @@ class OrderService {
     const [result] = await promisePool.execute(statement, [orderId])
     return result
   }
+
+  async modifyStatus() {}
 }
 
 module.exports = new OrderService()

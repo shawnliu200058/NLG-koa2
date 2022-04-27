@@ -66,6 +66,14 @@ class GoodController {
     ctx.body = result
   }
 
+  async modifyStatus(ctx) {
+    const { goodId } = ctx.params
+    const { status } = ctx.request.body
+    console.log(ctx.request.body)
+    const result = await goodService.modifyStatus(status, goodId)
+    ctx.body = result
+  }
+
   async getPublish(ctx) {
     const { userId } = ctx.request.query
     // console.log(userId, ctx.request.body)
