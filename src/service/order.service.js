@@ -6,14 +6,15 @@ const userSercice = require('./user.service')
 const snowId = require('simple-flakeid')
 
 class OrderService {
-  async create(info) {
+  async create(info, orderID) {
+    // console.log(info, orderID)
     const { deliveryAddress, goodList, remark, totalPrice } = info
     const { address, house, phone, realName, user_id } = deliveryAddress
 
-    let gen1 = new snowId.SnowflakeIdv1({ workerId: 1 })
-    // 生成订单编号
-    const orderID = gen1.NextId()
-    // console.log(`ID:${id1} ${typeof id1} length：${id1.toString().length}`)
+    // let gen1 = new snowId.SnowflakeIdv1({ workerId: 1 })
+    // // 生成订单编号
+    // const orderID = gen1.NextId()
+    // // console.log(`ID:${id1} ${typeof id1} length：${id1.toString().length}`)
 
     const goodListToStr = JSON.stringify(goodList)
 
@@ -32,6 +33,8 @@ class OrderService {
       remark,
       user_id
     ])
+
+    // console.log(result)
 
     return result
   }
@@ -69,6 +72,7 @@ class OrderService {
   }
 
   async delete(orderId) {
+    // console.log(orderId)
     const statement = `DELETE FROM my_order WHERE id = ?`
     const [result] = await promisePool.execute(statement, [orderId])
     return result

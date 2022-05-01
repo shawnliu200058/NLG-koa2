@@ -3,6 +3,7 @@ const snowId = require('simple-flakeid')
 
 const alipaySdk = require('../utils/alipayKeyTool/alipay')
 const service = require('../service/order.service')
+const goodService = require('../service//good.service')
 const { generatePaymentUrl } = require('../utils/alipayKeyTool/hooks')
 
 class OrderController {
@@ -12,11 +13,13 @@ class OrderController {
     // 生成订单编号
     const orderID = gen1.NextId()
     const { goodList } = ctx.request.body
+    // console.log(goodList)
+    await goodService.modifySaleAndStock(goodList)
+    await service.create(ctx.request.body, orderID)
     generatePaymentUrl(orderID, goodList)
       .then((url) => {
         // console.log(url)
         ctx.body = { url }
-        // await service.create(ctx.request.body)
       })
       .catch((err) => {
         console.log(err)

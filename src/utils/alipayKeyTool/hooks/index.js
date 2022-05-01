@@ -15,7 +15,7 @@ async function generatePaymentUrl(orderID, goodList) {
     'returnUrl',
     'http://localhost:8080/#/pages/paymentSucceeded/paymentSucceeded'
   )
-  console.log(totalAmount)
+  // console.log(totalAmount)
   formData.addField('bizContent', {
     outTradeNo: orderID,
     productCode: 'FAST_INSTANT_TRADE_PAY',

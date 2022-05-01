@@ -35,9 +35,34 @@ class GoodService {
   }
 
   async getGoodList(queryInfo) {
-    const { offset, limit } = queryInfo
+    const { offset, limit, auditStatus } = queryInfo
+    // console.log(auditStatus)
+
+    if (auditStatus !== undefined) {
+      const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status, good.auditStatus,
+	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
+      FROM good LEFT JOIN detail_pic 
+      ON good.id = detail_pic.good_id WHERE auditStatus = ?
+      GROUP BY good.id LIMIT ? OFFSET ?`
+
+      const [list] = await promisePool.execute(statement, [
+        auditStatus,
+        `${limit}`,
+        `${offset}`
+      ])
+
+      const totalCount = await publicService.getListCountById(
+        'good',
+        'auditStatus',
+        auditStatus
+      )
+
+      return { goodList: { totalCount, list } }
+    }
+
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
-        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status,
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status, good.auditStatus,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id
@@ -55,7 +80,35 @@ class GoodService {
 
   async getGoodListById(queryInfo, categoryId) {
     // console.log(categoryId)
-    const { offset, limit } = queryInfo
+    const { offset, limit, auditStatus } = queryInfo
+    console.log(auditStatus, categoryId)
+    if (auditStatus !== undefined) {
+      const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
+	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
+      FROM good LEFT JOIN detail_pic 
+      ON good.id = detail_pic.good_id WHERE category_id = ? AND auditStatus = ?
+      GROUP BY good.id LIMIT ? OFFSET ?`
+
+      const [list] = await promisePool.execute(statement, [
+        categoryId,
+        auditStatus,
+        `${limit}`,
+        `${offset}`
+      ])
+      const totalCount = await publicService.getListCountByTwo(
+        'good',
+        'category_id',
+        categoryId,
+        'auditStatus',
+        auditStatus
+      )
+
+      console.log(list)
+
+      return { goodList: { totalCount, list } }
+    }
+
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
         good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
@@ -160,6 +213,23 @@ class GoodService {
     const statement = `UPDATE good SET status = ? WHERE id = ?`
     const [result] = await promisePool.execute(statement, [!status, goodId])
     return result
+  }
+
+  async modifyAuditStatus(status, goodId) {
+    const statement = `UPDATE good SET auditStatus = ? WHERE id = ?`
+    const [result] = await promisePool.execute(statement, [status, goodId])
+    return result
+  }
+
+  async modifySaleAndStock(goodList) {
+    const statement = `UPDATE good SET sale = ?, stock = ? WHERE id = ?`
+    goodList.forEach(async (item) => {
+      await promisePool.execute(statement, [
+        item.sale + item.count,
+        item.stock - item.count,
+        item.id
+      ])
+    })
   }
 }
 

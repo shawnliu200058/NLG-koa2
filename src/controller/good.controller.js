@@ -94,6 +94,11 @@ class GoodController {
     const result = await goodService.delPublish(goodId)
     ctx.body = result
   }
+
+  async updateAudit(ctx) {
+    const { goodId } = ctx.params
+    ctx.body = goodId
+  }
 }
 
 module.exports = new GoodController()
