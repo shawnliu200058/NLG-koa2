@@ -52,6 +52,13 @@ class UserController {
     ctx.body = result
   }
 
+  async delUserInfo(ctx) {
+    const { id } = ctx.params
+    // console.log(ctx.params)
+    const result = await userService.deleteUserInfo(id)
+    return result
+  }
+
   async getUserList(ctx) {
     // console.log(ctx.request.body)
     const result = await userService.getList(ctx.request.body)

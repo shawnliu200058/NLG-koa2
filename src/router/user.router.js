@@ -17,7 +17,8 @@ const {
   updateUserInfo,
   changeUserPwd,
   retriveInfo,
-  getAvatar
+  getAvatar,
+  delUserInfo
 } = require('../controller/user.controller')
 const { login } = require('../controller/auth.controller')
 
@@ -43,6 +44,8 @@ userRouter.post('/list', verifyAuth, getUserList)
 userRouter.post('/query', verifyAuth, getUserByKeyword)
 // 更新用户信息
 userRouter.patch('/:id', updateUserInfo)
+// 删除用户
+// userRouter.delete('/:id', delUserInfo)
 // 重新获取用户信息
 userRouter.get('/info/:id', retriveInfo)
 // 修改密码

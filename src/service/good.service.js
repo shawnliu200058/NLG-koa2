@@ -41,9 +41,11 @@ class GoodService {
     if (auditStatus !== undefined) {
       const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
         good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status, good.auditStatus,
-	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
+	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic, user.nickName publisher
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id WHERE auditStatus = ?
+      LEFT JOIN user
+			ON good.user_id = user.id
       GROUP BY good.id LIMIT ? OFFSET ?`
 
       const [list] = await promisePool.execute(statement, [
@@ -63,9 +65,11 @@ class GoodService {
 
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
         good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status, good.auditStatus,
-	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
+	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic, user.nickName publisher
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id
+      LEFT JOIN user
+			ON good.user_id = user.id
       GROUP BY good.id LIMIT ? OFFSET ?`
 
     const [list] = await promisePool.execute(statement, [
@@ -155,7 +159,7 @@ class GoodService {
     const { offset, limit } = queryInfo
     // const statement = `SELECT * FROM good WHERE user_id = ? LIMIT ? OFFSET ?`
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
-        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status, 
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id WHERE user_id = ?

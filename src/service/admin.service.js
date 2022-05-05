@@ -5,7 +5,7 @@ class AdminService {
     const statement = `SELECT * FROM admin WHERE name = ?`
     const [result] = await promisePool.execute(statement, [name])
 
-    return result
+    return result.pop()
   }
 }
 

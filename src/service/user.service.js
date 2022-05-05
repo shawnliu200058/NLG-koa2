@@ -98,6 +98,13 @@ class UserService {
     return result
   }
 
+  async deleteUserInfo(userId) {
+    // console.log(userId)
+    const statement = `DELETE FROM user WHERE id = ?`
+    const [result] = await promisePool.execute(statement, [userId])
+    return result
+  }
+
   async updateAvatarById(url, userId) {
     const statement = `UPDATE user SET avatarUrl = ? WHERE id = ?;`
     const [result] = await promisePool.execute(statement, [url, userId])

@@ -37,12 +37,12 @@ class AuthMiddleware {
       } else {
         // 判断管理员是否存在的
         const result = await adminService.getAdminByName(name)
-        if (!result.length) {
+        if (!result) {
           const error = new Error(errorTypes.ADMIN_DOES_NOT_EXISTS)
           return ctx.app.emit('error', error, ctx)
         }
         // 4.判断密码是否和数据库中的密码是一致(加密)
-        const admin = result[0]
+        const admin = result
         // console.log(admin.password === md5password(password))
         if (md5password(password) !== admin.password) {
           const error = new Error(errorTypes.PASSWORD_IS_INCORRENT)

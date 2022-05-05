@@ -13,7 +13,7 @@ async function generatePaymentUrl(orderID, goodList) {
   formData.setMethod('get')
   formData.addField(
     'returnUrl',
-    'http://localhost:8080/#/pages/paymentSucceeded/paymentSucceeded'
+    'http://localhost:8081/#/pages/paymentSucceeded/paymentSucceeded'
   )
   // console.log(totalAmount)
   formData.addField('bizContent', {
