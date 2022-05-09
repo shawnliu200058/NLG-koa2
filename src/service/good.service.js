@@ -85,7 +85,7 @@ class GoodService {
   async getGoodListById(queryInfo, categoryId) {
     // console.log(categoryId)
     const { offset, limit, auditStatus } = queryInfo
-    console.log(auditStatus, categoryId)
+    // console.log(auditStatus, categoryId)
     if (auditStatus !== undefined) {
       const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
         good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
@@ -114,7 +114,7 @@ class GoodService {
     }
 
     const statement = `SELECT good.id, good.name, good.detail, good.price, good.unit, good.specification, 
-        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id,
+        good.sale, good.stock, good.good_address, good.displayPicUrl, good.category_id, good.status,
 	      JSON_ARRAYAGG(JSON_OBJECT('id', detail_pic.id, 'url', detail_pic.url)) detailPic
       FROM good LEFT JOIN detail_pic 
       ON good.id = detail_pic.good_id WHERE category_id = ?

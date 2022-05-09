@@ -35,7 +35,7 @@ const delOldFile = async (ctx, next) => {
   // console.log(ctx.request.url.includes('category'))
   const { categoryId } = ctx.params
   const iconInfo = await fileService.getCategoryIconById(categoryId)
-  console.log(iconInfo)
+  // console.log(iconInfo)
   if (iconInfo) {
     const { filename } = iconInfo
     console.log(filename)
@@ -51,7 +51,7 @@ const delOldFile = async (ctx, next) => {
 
 const delGoodPic = async (ctx, next) => {
   const { goodId } = ctx.params
-  console.log(ctx.query)
+  // console.log(ctx.query)
   const { isDelDetailPic } = ctx.query
   // console.log(goodId)
   const displayPic = await fileService.getGoodPicById('display_pic', goodId)

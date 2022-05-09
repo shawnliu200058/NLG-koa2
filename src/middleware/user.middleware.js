@@ -31,8 +31,8 @@ class UserMiddleware {
 
       // 验证用户名是否重复
       const result = await service.getUserByName(name)
-      console.log(result)
-      if (result.length) {
+      // console.log(result)
+      if (result) {
         const error = new Error(errorTypes.USER_ALREADY_EXISTS)
         return ctx.app.emit('error', error, ctx)
       }
